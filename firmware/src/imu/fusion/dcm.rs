@@ -21,9 +21,9 @@ impl Dcm {
 
 impl Fuser for Dcm {
 	fn process(&mut self, unfused: &UnfusedData) -> FusedData {
-		let last = self.last;
-		self.last = Instant::now();
-		let elapsed = self.last - last;
+		let now = Instant::now();
+		let elapsed = now - self.last;
+		self.last = now;
 		let elapsed = elapsed.as_secs_f32();
 
 		let UnfusedData { accel, gyro } = unfused;
